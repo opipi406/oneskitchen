@@ -3,7 +3,9 @@
 飲食店向けデジタルメニュー<br>
 <span style="font-size: 16px">大衆ビストロ one's kitchen</span>
 </h1>
-<h2><a href="https://tendonft.com" target="_blank">https://unico-unique.sakura.ne.jp/oneskitchen</a></h2>
+<h2>
+  <a href="https://unico-unique.sakura.ne.jp/oneskitchen" target="_blank">https://unico-unique.sakura.ne.jp/oneskitchen</a>
+</h2>
 </div>
 
 ---
