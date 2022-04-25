@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="大衆ビストロ one's kitchen" />
+  <meta property="og:description" content="これは説明です。これは説明です。これは説明です。これは説明です。これは説明です。これは説明です。" />
+  <meta property="og:site_name" content="大衆ビストロ one's kitchen" />
+  <meta property="og:image" content="https://unico-unique.sakura.ne.jp/oneskitchen/img/ogp.jpg" />
+  <meta name="twitter:card" content="summary_large_image">
+
+  <title>大衆ビストロ one's kitchen</title>
+
+  <!-- jQuery CDN -->
+  <script src="./js/ext/jquery-3.6.0.min.js"></script>
+  <!-- Vue.js CDN -->
+  <script src="./js/ext/vue.min.js"></script>
+  <!-- Axios CDN -->
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+  <link rel="stylesheet" href="./css/destyle.min.css">
+  <link rel="stylesheet" href="./css/common.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/transition.css">
+  <link rel="stylesheet" href="./css/burger-menu.css">
+
+</head>
+
+
+<body background="./img/bg.jpg">
+
+  <div id="app">
+
+    <!-- OPアニメーション -->
+    <transition name="opening">
+      <!--  -->
+      <div class="fv" v-show="isShowLogo">
+        <img class="logo" src="./img/logo.png" alt="ロゴ"></img>
+      </div>
+      <!--  -->
+    </transition>
+
+    <!-- 初回選択画面 -->
+    <transition name="opening">
+      <!--  -->
+      <div class="initial-screen" v-show="currentGroup === '' && !isShowLogo">
+        <div class="initial-screen__btn" @click="onClickGroup('food')">
+          <img rel="preload" src="./img/food.jpg" alt="">
+          <p>Food</p>
+        </div>
+        <div class="initial-screen__btn" @click="onClickGroup('drink')">
+          <img rel="preload" src="./img/drink.jpg" alt="">
+          <p>Drink</p>
+        </div>
+      </div>
+      <!--  -->
+    </transition>
+
+    <!-- メイン画面 -->
+    <transition name="opening">
+      <!--  -->
+      <div id="root" v-show="currentGroup !== '' && !isShowLogo">
+
+        <!-- Header -->
+        <header class="header-wrapper">
+          <div class="header">
+            <ul class="group-tab">
+              <li class="group-tab__item" @click="onClickGroup('food')">
+                <a :class="{'selected': currentGroup === 'food'}">Food</a>
+              </li>
+              <li class="group-tab__item" @click="onClickGroup('drink')">
+                <a :class="{'selected': currentGroup === 'drink'}">Drink</a>
+              </li>
+            </ul>
+            <span class="spacer"></span>
+            <nav class="header__menu">
+              <button class="burger-menu">
+                <div class="burger-menu__lines"></div>
+                <!-- <span>MENU</span> -->
+              </button>
+              <ul>
+                <img src="./img/logo.png" alt="ロゴ" width="128">
+                <li v-for="item in items[currentGroup]">
+                  <a @click="onClickCategory(item.id)" :class="{'selected': currentCategory === item.id}">
+                    {{ item.category }}
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </header>
+        <div id="overlay"></div> <!-- ハンバーガーメニュー用オーバーレイ -->
+
+        <!-- Main Container -->
+        <main>
+          <h1 class="heading">Menu</h1>
+          <ul class="category-list">
+            <li class="category-list__item" 
+              v-show="currentCategory === -1 || currentCategory === item.id"
+              v-for="item in items[currentGroup]">
+              <transition name="category">
+                <div class="category-list__item-btn" 
+                  @click="onClickCategory(item.id)"
+                  v-show="currentCategory === -1 || currentCategory === item.id">
+                  {{ item.category }}
+                </div>
+              </transition>
+              <transition name="menu">
+                <ul class="menu-list" v-show="currentCategory === item.id">
+                  <li class="menu-list__item" 
+                    @click="onClickMenu(menu.id, menu.url)" 
+                    v-for="menu in item.menus">
+                    <div class="menu-text">
+                      <div class="menu-text__name">{{ menu.name }}</div>
+                      <div class="menu-text__price">￥{{ menu.price.toLocaleString() }}</div>
+                    </div>
+                    <div class="menu-description">{{ menu.description }}</div>
+                  </li>
+                </ul>
+              </transition>
+            </li>
+          </ul>
+        </main>
+
+        <!-- Footer -->
+        <small>表示価格は全て税込み価格です</small>
+        <footer>
+          <p>Welcome to our party</p>
+        </footer>
+
+        <!-- Food Preview -->
+        <div class="preview-overlay" @click="onClosePreview" v-show="displayedMenuUrl !== ''">
+          <transition name="scale">
+            <div class="preview" v-show="displayedMenuUrl !== ''">
+              <img class="preview__img" :src="'./img/menu/' + displayedMenuUrl">
+            </div>
+          </transition>
+        </div>
+
+      </div>
+      <!--  -->
+    </transition>
+
+
+  </div>
+
+
+
+</body>
+
+<!-- Initialized Vue Instance -->
+<script src="./js/main.js"></script>
+
+</html>

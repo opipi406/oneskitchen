@@ -1,0 +1,41 @@
+// オープニングロゴフェードイン・アウト
+.opening-enter-active {
+  transition: all .4s linear;
+  transition-delay: .2s;
+}
+.opening-leave-active {
+  transition: all .4s cubic-bezier(.22, 1, .36, 1);
+}
+.opening-enter,
+.opening-leave-to {
+  opacity: 0;
+}
+
+// スケールイン・アウト
+.scale-enter-active,
+.scale-leave-active {
+  transition: all .4s cubic-bezier(.22, 1, .36, 1);
+}
+.scale-enter,
+.scale-leave-to {
+  transform: scale(.6);
+
+  opacity: 0;
+}
+
+// カテゴリ
+.category-enter,
+.category-leave-to {
+  display: none;
+}
+
+// メニュー
+.menu-enter-active {
+  transition: all .4s cubic-bezier(.22, 1, .36, 1);
+}
+.menu-enter,
+.menu-leave-to {
+  transform: scale(.8);
+
+  opacity: 0;
+}

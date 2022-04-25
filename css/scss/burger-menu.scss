@@ -1,0 +1,83 @@
+@import "variables";
+@import "media-query";
+
+/*****************************************************/
+/*  ハンバーガーメニュー
+/*****************************************************/
+$menu-size: 32px;
+
+.burger-menu {
+  position: relative;
+  z-index: 100;
+
+  display: flex;
+  align-items: center;
+
+  height: $menu-size;
+
+  &__lines {
+    position: relative;
+    z-index: 100;
+
+    display: inline-block;
+
+    width: $menu-size;
+    height: 3px;
+
+    transition: .15s cubic-bezier(.33, 1, .68, 1);
+
+    background-color: $color-text;
+
+    &::before,
+    &::after {
+      position: absolute;
+      left: 0;
+
+      width: 100%;
+      height: 100%;
+
+      content: "";
+      transition: .3s cubic-bezier(.33, 1, .68, 1);
+
+      background-color: $color-text;
+    }
+    &::before {
+      transform: translateY(-$menu-size / 3);
+    }
+    &::after {
+      transform: translateY($menu-size / 3);
+    }
+    &.open {
+      background-color: transparent !important;
+      &::before {
+        transform: rotate(-45deg);
+
+        background-color: $color-text !important;
+      }
+      &::after {
+        transform: rotate(45deg);
+
+        background-color: $color-text !important;
+      }
+    }
+  }
+
+  span {
+    margin-left: 10px;
+  }
+
+  &.open span {
+    color: $color-text !important;
+  }
+
+  &.js-reverce-color {
+    .burger-menu__lines,
+    .burger-menu__lines::before,
+    .burger-menu__lines::after {
+      background-color: black;
+    }
+    span {
+      color: black;
+    }
+  }
+}
