@@ -8,7 +8,7 @@
 
   <meta property="og:type" content="website" />
   <meta property="og:title" content="大衆ビストロ one's kitchen" />
-  <meta property="og:description" content="これは説明です。これは説明です。これは説明です。これは説明です。これは説明です。これは説明です。" />
+  <meta property="og:description" content="大衆ビストロのデジタルメニューです。" />
   <meta property="og:site_name" content="大衆ビストロ one's kitchen" />
   <meta property="og:image" content="https://unico-unique.sakura.ne.jp/oneskitchen/img/ogp.jpg" />
   <meta name="twitter:card" content="summary_large_image">
@@ -82,13 +82,15 @@
                 <div class="burger-menu__lines"></div>
                 <!-- <span>MENU</span> -->
               </button>
-              <ul>
-                <img src="./img/logo.png" alt="ロゴ" width="128">
-                <li v-for="item in items[currentGroup]">
-                  <a @click="onClickCategory(item.id)" :class="{'selected': currentCategory === item.id}">
-                    {{ item.category }}
-                  </a>
-                </li>
+              <ul class="burger-list">
+                <img class="burger-list__img" src="./img/logo.png" alt="ロゴ" width="128">
+                <div class="burger-list__body">
+                  <li v-for="item in items[currentGroup]">
+                    <a @click="onClickCategory(item.id)" :class="{'selected': currentCategory === item.id}">
+                      {{ item.category }}
+                    </a>
+                  </li>
+                </div>
               </ul>
             </nav>
           </div>
@@ -124,6 +126,8 @@
               </transition>
             </li>
           </ul>
+
+          <div class="back-button" @click="onClickHome" v-show="currentCategory !== -1">TOP</div>
         </main>
 
         <!-- Footer -->

@@ -326,3 +326,56 @@ main {
     max-height: 60%;
   }
 }
+
+
+/*****************************************************/
+/*  戻るボタン
+/*****************************************************/
+.back-button {
+  font-size: 85%;
+
+  position: fixed;
+  z-index: 10;
+  right: 25px;
+  bottom: 25px;
+
+  display: block;
+
+  box-sizing: border-box;
+  width: 50px;
+  height: 50px;
+  padding-top: 0px;
+
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  letter-spacing: -1px;
+
+  opacity: .5;
+  color: #333333;
+  border: 1px solid #999999;
+  background: #ffffff;
+
+  &::before {
+    position: absolute;
+    top: 60%;
+    right: 0;
+    left: 0;
+
+    display: block;
+
+    width: 35%;
+    height: 35%;
+    margin: auto;
+
+    content: "";
+    transform: rotate(-45deg);
+
+    border-top: 2px solid #333333;
+    border-right: 2px solid #333333;
+  }
+
+  &:hover {
+    opacity: .8;
+  }
+}

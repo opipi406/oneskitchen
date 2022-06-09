@@ -30,6 +30,7 @@ vm = new Vue({
       if (x !== this.currentCategory) this.currentCategory = x;
       else this.currentCategory = -1;
       $(".burger-menu, .burger-menu__lines, #overlay").removeClass("open");
+      $("body,html").animate({ scrollTop: 0 }, 400, "swing");
     },
 
     // メニューの選択
@@ -47,6 +48,13 @@ vm = new Vue({
     onClosePreview: function () {
       this.currentMenu = -1;
       this.displayedMenuUrl = "";
+    },
+
+    // ホーム（カテゴリー一覧）へ戻る
+    onClickHome: function () {
+      this.currentCategory = -1;
+      this.currentMenu = -1;
+      $("body,html").animate({ scrollTop: 0 }, 400, "swing");
     }
 
   },
